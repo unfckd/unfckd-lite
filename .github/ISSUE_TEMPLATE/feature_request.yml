@@ -1,58 +1,58 @@
 name: Feature request
 description: Suggest a new check or improvement for unfckd-lite
-title: "[Feature]: "
-labels: ["enhancement"]
+title: '[Feature]: '
+labels: ['enhancement']
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Got an idea? We'd love to hear it.
-        You can also post and upvote ideas in `#feature-requests` on our [Discord](https://discord.gg/FWhmYd29DP).
+    - type: markdown
+      attributes:
+          value: |
+              Got an idea? We'd love to hear it.
+              You can also post and upvote ideas in `#feature-requests` on our [Discord](https://discord.gg/FWhmYd29DP).
 
-  - type: textarea
-    id: problem
-    attributes:
-      label: What problem would this solve?
-      description: Describe the issue you run into on your server, not just the solution.
-      placeholder: When two resources register the same export, the server just silently uses one of them and I spend ages figuring out why.
-    validations:
-      required: true
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: What would you like unfckd-lite to do?
-      placeholder: Detect duplicate export names across resources and list which resources define them.
-    validations:
-      required: true
-
-  - type: dropdown
-    id: framework
-    attributes:
-      label: Is this specific to a framework?
-      options:
-        - No, it applies to every server
-        - ESX
-        - QBCore
-        - Qbox
-        - ox_core
-        - ND
-        - vRP
-        - RedM frameworks
-        - Other
-    validations:
-      required: true
-
-  - type: textarea
-    id: extra
-    attributes:
-      label: Anything else?
-      description: Examples, screenshots or links that help explain the idea.
-
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: Before submitting
-      options:
-        - label: I searched existing issues and this hasn't been suggested yet
+    - type: textarea
+      id: problem
+      attributes:
+          label: What problem would this solve?
+          description: Describe the issue you run into on your server, not just the solution.
+          placeholder: When two resources register the same export, the server just silently uses one of them and I spend ages figuring out why.
+      validations:
           required: true
+
+    - type: textarea
+      id: solution
+      attributes:
+          label: What would you like unfckd-lite to do?
+          placeholder: Detect duplicate export names across resources and list which resources define them.
+      validations:
+          required: true
+
+    - type: dropdown
+      id: framework
+      attributes:
+          label: Is this specific to a framework?
+          options:
+              - No, it applies to every server
+              - ESX
+              - QBCore
+              - Qbox
+              - ox_core
+              - ND
+              - vRP
+              - RedM frameworks
+              - Other
+      validations:
+          required: true
+
+    - type: textarea
+      id: extra
+      attributes:
+          label: Anything else?
+          description: Examples, screenshots or links that help explain the idea.
+
+    - type: checkboxes
+      id: checks
+      attributes:
+          label: Before submitting
+          options:
+              - label: I searched existing issues and this hasn't been suggested yet
+                required: true

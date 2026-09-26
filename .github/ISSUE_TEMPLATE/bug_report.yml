@@ -1,114 +1,114 @@
 name: Bug report
 description: Something in unfckd-lite isn't working as expected
-title: "[Bug]: "
-labels: ["bug"]
+title: '[Bug]: '
+labels: ['bug']
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to report a bug!
-        **Security issues don't belong here.** Please follow [SECURITY.md](https://github.com/unfckd/unfckd-lite/blob/main/SECURITY.md) instead.
-        For general questions or help with your server, use `#help` on our [Discord](https://discord.gg/FWhmYd29DP).
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to report a bug!
+              **Security issues don't belong here.** Please follow [SECURITY.md](https://github.com/unfckd/unfckd-lite/blob/main/SECURITY.md) instead.
+              For general questions or help with your server, use `#help` on our [Discord](https://discord.gg/FWhmYd29DP).
 
-  - type: textarea
-    id: description
-    attributes:
-      label: What happened?
-      description: A clear description of the bug. Include what you expected to happen instead.
-      placeholder: unfckd-lite reports a missing dependency for ox_inventory, but ox_lib is installed and started.
-    validations:
-      required: true
-
-  - type: textarea
-    id: reproduce
-    attributes:
-      label: Steps to reproduce
-      description: How can we trigger the bug ourselves?
-      placeholder: |
-        1. Install ox_lib and ox_inventory
-        2. Add both to server.cfg
-        3. Start the server
-        4. See the report
-    validations:
-      required: true
-
-  - type: textarea
-    id: output
-    attributes:
-      label: Scan output
-      description: Paste the full unfckd-lite report from your console. Remove anything private, like license keys or IPs.
-      render: shell
-    validations:
-      required: true
-
-  - type: input
-    id: version
-    attributes:
-      label: unfckd-lite version
-      placeholder: "1.0.0"
-    validations:
-      required: true
-
-  - type: input
-    id: artifact
-    attributes:
-      label: Server artifact version
-      description: Shown at the top of your server console on startup.
-      placeholder: "12345"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: platform
-    attributes:
-      label: Platform
-      options:
-        - FiveM
-        - RedM
-    validations:
-      required: true
-
-  - type: dropdown
-    id: framework
-    attributes:
-      label: Framework
-      options:
-        - ESX
-        - QBCore
-        - Qbox
-        - ox_core
-        - ND
-        - vRP
-        - VORP (RedM)
-        - RSG (RedM)
-        - Standalone / custom
-        - Other
-    validations:
-      required: true
-
-  - type: dropdown
-    id: os
-    attributes:
-      label: Server OS
-      options:
-        - Windows
-        - Linux
-        - Hosting provider / not sure
-    validations:
-      required: true
-
-  - type: textarea
-    id: extra
-    attributes:
-      label: Anything else?
-      description: Screenshots, relevant parts of your server.cfg, or other details that might help.
-
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: Before submitting
-      options:
-        - label: I'm using the latest release of unfckd-lite
+    - type: textarea
+      id: description
+      attributes:
+          label: What happened?
+          description: A clear description of the bug. Include what you expected to happen instead.
+          placeholder: unfckd-lite reports a missing dependency for ox_inventory, but ox_lib is installed and started.
+      validations:
           required: true
-        - label: I searched existing issues and this hasn't been reported yet
+
+    - type: textarea
+      id: reproduce
+      attributes:
+          label: Steps to reproduce
+          description: How can we trigger the bug ourselves?
+          placeholder: |
+              1. Install ox_lib and ox_inventory
+              2. Add both to server.cfg
+              3. Start the server
+              4. See the report
+      validations:
           required: true
+
+    - type: textarea
+      id: output
+      attributes:
+          label: Scan output
+          description: Paste the full unfckd-lite report from your console. Remove anything private, like license keys or IPs.
+          render: shell
+      validations:
+          required: true
+
+    - type: input
+      id: version
+      attributes:
+          label: unfckd-lite version
+          placeholder: '1.0.0'
+      validations:
+          required: true
+
+    - type: input
+      id: artifact
+      attributes:
+          label: Server artifact version
+          description: Shown at the top of your server console on startup.
+          placeholder: '12345'
+      validations:
+          required: true
+
+    - type: dropdown
+      id: platform
+      attributes:
+          label: Platform
+          options:
+              - FiveM
+              - RedM
+      validations:
+          required: true
+
+    - type: dropdown
+      id: framework
+      attributes:
+          label: Framework
+          options:
+              - ESX
+              - QBCore
+              - Qbox
+              - ox_core
+              - ND
+              - vRP
+              - VORP (RedM)
+              - RSG (RedM)
+              - Standalone / custom
+              - Other
+      validations:
+          required: true
+
+    - type: dropdown
+      id: os
+      attributes:
+          label: Server OS
+          options:
+              - Windows
+              - Linux
+              - Hosting provider / not sure
+      validations:
+          required: true
+
+    - type: textarea
+      id: extra
+      attributes:
+          label: Anything else?
+          description: Screenshots, relevant parts of your server.cfg, or other details that might help.
+
+    - type: checkboxes
+      id: checks
+      attributes:
+          label: Before submitting
+          options:
+              - label: I'm using the latest release of unfckd-lite
+                required: true
+              - label: I searched existing issues and this hasn't been reported yet
+                required: true
