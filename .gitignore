@@ -1,41 +1,21 @@
-# Compiled Lua sources
-luac.out
-
-# luarocks build files
-*.src.rock
+# Release builds (attach to GitHub Releases, don't commit)
 *.zip
+*.rar
+*.7z
 *.tar.gz
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+# unfckd-lite exported scan reports
+reports/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Logs
+*.log
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
+# Editor and IDE
+.vscode/
+.idea/
+*.code-workspace
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

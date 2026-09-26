@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Help with your server
+    url: https://discord.gg/FWhmYd29DP
+    about: Questions and setup help go in #help on our Discord.
+  - name: Report a security vulnerability
+    url: https://github.com/unfckd/unfckd-lite/security/advisories/new
+    about: Please report security issues privately, never in a public issue.
+  - name: Unfckd dashboard support
+    url: https://unfckd.dev
+    about: Issues with the full Unfckd dashboard or your subscription.
