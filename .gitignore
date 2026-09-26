@@ -11,7 +11,8 @@ reports/
 *.log
 
 # Editor and IDE
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 .idea/
 *.code-workspace
 

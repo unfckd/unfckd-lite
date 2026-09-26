@@ -1,0 +1,8 @@
+# Not source
+node_modules/
+package-lock.json
+cache/
+.replxx_history
+
+# Lua is handled by StyLua (see stylua.toml), not Prettier
+*.lua

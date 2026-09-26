@@ -1,0 +1,3 @@
+{
+    "recommendations": ["sumneko.lua", "JohnnyMorganz.stylua", "EditorConfig.EditorConfig", "eamodio.gitlens", "GitHub.vscode-pull-request-github", "redhat.vscode-yaml", "usernamehw.errorlens", "DavidAnson.vscode-markdownlint"]
+}
