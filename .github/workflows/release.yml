@@ -70,11 +70,19 @@ jobs:
                   sha256sum "unfckd-lite-v$VERSION.zip" > "unfckd-lite-v$VERSION.zip.sha256"
 
             - name: Publish
-              uses: softprops/action-gh-release@v2
-              with:
-                  name: unfckd-lite v${{ env.VERSION }}
-                  body_path: release-notes.md
-                  prerelease: ${{ contains(github.ref_name, '-') }}
-                  files: |
-                      unfckd-lite-v${{ env.VERSION }}.zip
-                      unfckd-lite-v${{ env.VERSION }}.zip.sha256
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  flags=()
+
+                  if [[ "$VERSION" == *-* ]]; then
+                      flags+=(--prerelease)
+                  fi
+
+                  gh release create "$GITHUB_REF_NAME" \
+                      "unfckd-lite-v$VERSION.zip" \
+                      "unfckd-lite-v$VERSION.zip.sha256" \
+                      --title "unfckd-lite v$VERSION" \
+                      --notes-file release-notes.md \
+                      --verify-tag \
+                      "${flags[@]}"
