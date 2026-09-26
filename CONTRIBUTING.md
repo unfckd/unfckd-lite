@@ -44,6 +44,14 @@ These are non-negotiable, because they're what makes unfckd-lite trustworthy:
 - Every new `.lua` file starts with the license header used in the existing files
 - Report messages should say **what's wrong and how to fix it**, not just that something failed
 
+Every pull request runs [Luacheck](https://github.com/lunarmodules/luacheck), [StyLua](https://github.com/JohnnyMorganz/StyLua) and [Prettier](https://prettier.io), plus a check for the ground rules above. To run the same checks locally:
+
+```shell
+luacheck .
+stylua --check .
+npx prettier --check .
+```
+
 ## Pull requests
 
 1. Create a branch from `main` with a clear name, like `fix/manifest-parsing` or `feat/duplicate-exports`
@@ -53,6 +61,21 @@ These are non-negotiable, because they're what makes unfckd-lite trustworthy:
 5. Make sure the scan still runs cleanly on a server without problems
 
 Pull requests from new contributors need approval before automated checks run. That's normal, so don't worry if yours waits a bit.
+
+## Releasing
+
+For maintainers:
+
+1. Set the new `version` in [fxmanifest.lua](fxmanifest.lua)
+2. In [CHANGELOG.md](CHANGELOG.md), rename `Unreleased` to the new version with today's date, add a fresh empty `Unreleased` section above it, and update the links at the bottom
+3. Commit, then tag and push:
+
+    ```shell
+    git tag v1.2.3
+    git push origin v1.2.3
+    ```
+
+The release workflow runs every check, makes sure the tag matches `fxmanifest.lua` and the changelog, builds `unfckd-lite-v1.2.3.zip` with a checksum, and publishes the GitHub release with the changelog section as its notes. Tags with a suffix, like `v1.3.0-beta.1`, are published as pre-releases.
 
 ## Licensing
 

@@ -1,0 +1,75 @@
+name: Release
+
+on:
+    push:
+        tags: ['v*.*.*']
+
+jobs:
+    ci:
+        name: CI
+        uses: ./.github/workflows/ci.yml
+
+    release:
+        name: Publish release
+        needs: ci
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Check versions
+              run: |
+                  version="${GITHUB_REF_NAME#v}"
+                  manifest=$(sed -nE "s/^version '([^']+)'.*/\1/p" fxmanifest.lua)
+
+                  if [ "$version" != "$manifest" ]; then
+                      echo "::error::Tag $GITHUB_REF_NAME does not match version '$manifest' in fxmanifest.lua"
+                      exit 1
+                  fi
+
+                  if ! grep -qF "## [$version]" CHANGELOG.md; then
+                      echo "::error::CHANGELOG.md has no section for $version"
+                      exit 1
+                  fi
+
+                  echo "VERSION=$version" >> "$GITHUB_ENV"
+
+            - name: Write release notes
+              run: |
+                  awk -v heading="## [$VERSION]" '
+                      index($0, heading) == 1 { found = 1; next }
+                      found && (/^## \[/ || /^\[[^]]+\]: /) { exit }
+                      found { print }
+                  ' CHANGELOG.md > release-notes.md
+
+                  cat >> release-notes.md <<EOF
+
+                  ## Installation
+
+                  1. Download \`unfckd-lite-v$VERSION.zip\` below
+                  2. Extract it into your \`resources\` folder, so you get \`resources/unfckd-lite\`
+                  3. Add \`ensure unfckd-lite\` to your \`server.cfg\`, above every other \`ensure\` line
+                  4. Restart your server and check the console for the report
+                  EOF
+
+            - name: Build zip
+              run: |
+                  mkdir -p build/unfckd-lite
+                  cp -r fxmanifest.lua config.lua server LICENSE NOTICE README.md CHANGELOG.md build/unfckd-lite/
+
+                  cd build
+                  zip -rq "../unfckd-lite-v$VERSION.zip" unfckd-lite
+                  cd ..
+
+                  sha256sum "unfckd-lite-v$VERSION.zip" > "unfckd-lite-v$VERSION.zip.sha256"
+
+            - name: Publish
+              uses: softprops/action-gh-release@v2
+              with:
+                  name: unfckd-lite v${{ env.VERSION }}
+                  body_path: release-notes.md
+                  prerelease: ${{ contains(github.ref_name, '-') }}
+                  files: |
+                      unfckd-lite-v${{ env.VERSION }}.zip
+                      unfckd-lite-v${{ env.VERSION }}.zip.sha256

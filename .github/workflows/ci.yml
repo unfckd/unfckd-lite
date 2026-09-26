@@ -1,0 +1,63 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_call:
+
+permissions:
+    contents: read
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Luacheck
+              uses: lunarmodules/luacheck@v1
+
+            - name: StyLua
+              uses: JohnnyMorganz/stylua-action@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  version: 2.5.2
+                  args: --check .
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Prettier
+              run: npx --yes prettier@3 --check .
+
+    rules:
+        name: Ground rules
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: No network access
+              run: |
+                  if grep -rnE "PerformHttpRequest|require\(['\"](https?|net|dgram|tls|child_process)['\"]\)|fetch\(" server; then
+                      echo "::error::unfckd-lite must never make network requests, see CONTRIBUTING.md"
+                      exit 1
+                  fi
+
+            - name: Scanned files are never executed
+              run: |
+                  if grep -rnE "(^|[^A-Za-z0-9_.:])(load|loadstring|dofile|loadfile)[[:space:]]*\(" server; then
+                      echo "::error::Scanned files must only be read as text, see CONTRIBUTING.md"
+                      exit 1
+                  fi
+
+            - name: License headers
+              run: |
+                  missing=$(grep -L "Licensed under GPL-3.0 with additional terms" $(git ls-files '*.lua' '*.js') || true)
+                  if [ -n "$missing" ]; then
+                      echo "::error::These files are missing the license header:"
+                      echo "$missing"
+                      exit 1
+                  fi
