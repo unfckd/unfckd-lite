@@ -4,10 +4,15 @@ on:
     push:
         tags: ['v*.*.*']
 
+permissions:
+    contents: read
+
 jobs:
     ci:
         name: CI
         uses: ./.github/workflows/ci.yml
+        permissions:
+            contents: read
 
     release:
         name: Publish release
