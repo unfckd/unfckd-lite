@@ -65,7 +65,7 @@ jobs:
                   sha256sum "unfckd-lite-v$VERSION.zip" > "unfckd-lite-v$VERSION.zip.sha256"
 
             - name: Publish
-              uses: softprops/action-gh-release@v2
+              uses: softprops/action-gh-release@v3
               with:
                   name: unfckd-lite v${{ env.VERSION }}
                   body_path: release-notes.md
